@@ -14,9 +14,9 @@ pipeline {
     
     stage('Deploy to Azure') {
       environment {
-        AZURE_CREDENTIALS = credentials('hahaha')
-        AZURE_APP_NAME = 'java-env-Dev'
-        AZURE_RESOURCE_GROUP = 'azureJenkinsJava'
+        AZURE_CREDENTIALS = credentials('Workshop_secret')
+        AZURE_APP_NAME = 'Workshop12345'
+        AZURE_RESOURCE_GROUP = 'Workshop'
       }
       
       steps {
@@ -26,7 +26,7 @@ pipeline {
 
 
         // Authenticate with Azure using service principal credentials
-        withCredentials([azureServicePrincipal(credentialsId: 'hahaha', variable: 'AZURE_CREDENTIALS')]) {
+        withCredentials([azureServicePrincipal(credentialsId: 'Workshop_secret', variable: 'AZURE_CREDENTIALS')]) {
           sh 'az login --service-principal -u $AZURE_CREDENTIALS_USR -p $AZURE_CREDENTIALS_PSW --tenant $AZURE_CREDENTIALS_TENANT'
         }
         
